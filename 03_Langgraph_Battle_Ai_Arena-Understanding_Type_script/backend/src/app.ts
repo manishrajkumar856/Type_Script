@@ -7,7 +7,7 @@ const app = express();
 
 app.get("/", async (req, res) => {
 
-    const result = await runGraph("Write an article about apj abdul kalam 100 words.");
+    const result = await runGraph("Write a function to reverse a string in JavaScript.");
     console.log(result);
     res.send(result);
 });
