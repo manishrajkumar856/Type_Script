@@ -5,6 +5,7 @@ import MessageList from "../components/MessageList";
 import ChatInput from "../components/ChatInput";
 import { Sparkles, Trophy, Sun, Moon } from "lucide-react";
 import { Button } from "../../../shared/ui/Button";
+import { h1 } from "framer-motion/client";
 
 const ChatArena = ({ isDark, toggleTheme }) => {
   const { messages, isLoading, error, sendMessage } = useChat();
@@ -37,7 +38,7 @@ const ChatArena = ({ isDark, toggleTheme }) => {
         </div>
       </header>
 
-      <main className="flex-1 w-full pb-[10px]">
+      <main className="flex-1 w-full pb-40">
         {error && (
           <div className="max-w-2xl mx-auto mt-10 p-4 bg-red-50 dark:bg-red-900/10 border border-red-100 dark:border-red-900/30 rounded-xl flex items-center gap-3 text-red-600 dark:text-red-400 font-bold animate-in">
             <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
@@ -46,7 +47,7 @@ const ChatArena = ({ isDark, toggleTheme }) => {
         )}
 
         {messages.length === 0 ? (
-          <EmptyState onStart={sendMessage} isLoading={isLoading} />
+          <EmptyState onStart={(prompt) => sendMessage({ prompt })} isLoading={isLoading} />
         ) : (
           <MessageList messages={messages} isDark={isDark} />
         )}

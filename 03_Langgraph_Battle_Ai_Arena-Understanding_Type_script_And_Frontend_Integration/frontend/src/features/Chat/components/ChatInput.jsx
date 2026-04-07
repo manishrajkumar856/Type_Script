@@ -6,10 +6,10 @@ import { Button } from "../../../shared/ui/Button";
 const ChatInput = ({ onSend, isLoading }) => {
   const [value, setValue] = React.useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e?.preventDefault();
     if (value.trim() && !isLoading) {
-      onSend(value);
+      await onSend({ prompt: value });
       setValue("");
     }
   };
@@ -18,7 +18,7 @@ const ChatInput = ({ onSend, isLoading }) => {
     <div className="fixed bottom-0 left-0 right-0 p-6 md:p-10 z-50 pointer-events-none">
       <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-primary)] via-[var(--bg-primary)] to-transparent pointer-events-none" />
       <div className="max-w-4xl mx-auto relative pointer-events-auto">
-        <form 
+        <form
           onSubmit={handleSubmit}
           className="relative flex items-center gap-3 p-2 bg-[var(--bg-secondary)] rounded-[2rem] border border-[var(--border-subtle)] shadow-xl focus-within:ring-2 focus-within:ring-indigo-500/20 transition-all duration-300"
         >
@@ -27,7 +27,7 @@ const ChatInput = ({ onSend, isLoading }) => {
               <Paperclip size={20} />
             </button>
           </div>
-          
+
           <input
             type="text"
             value={value}
@@ -41,7 +41,7 @@ const ChatInput = ({ onSend, isLoading }) => {
             <button type="button" className="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors hidden sm:block">
               <Mic size={20} />
             </button>
-            <Button 
+            <Button
               type="submit"
               size="icon"
               disabled={isLoading || !value.trim()}
